@@ -79,6 +79,8 @@ def makeFile(grpNum, partNum, name, env, weight, box, manufacturer, notes, numIt
     f.close()
 
 def addPart():
+    root = r"C:\Users\zachw\Desktop\361Parts"
+
     grpNum = groupNumEntry.get()
     partNum = partNumEntry.get()
     boxNum = boxNumEntry.get()
@@ -89,6 +91,14 @@ def addPart():
     manufacturer = manufacturerEntry.get()
     notes = notesEntry.get()
     numItems = numItemsEntry.get()
+
+    partNumWithListed = partNum + ' LISTED'
+
+    for dirpath, dirnames, filenames in os.walk(root):
+        if partNum in dirnames or partNumWithListed in dirnames:
+            tkinter.messagebox.showinfo('already exists', "This part is already in your files at %s" %(dirpath))
+            return
+            
     
     if (makeDirectory(partNum, boxNum)):
         makeFile(grpNum, partNum, partName, envelSize, weight, boxNum, manufacturer, notes, numItems)
