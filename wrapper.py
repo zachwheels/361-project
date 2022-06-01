@@ -170,7 +170,9 @@ def movePart():
         if partNum in dirnames:
             partPath = dirpath + '\\' + partNum
 
-    destination = root + "box #%s" %(boxNum)
+    destination = root + '\\' + "box #%s" %(boxNum)
+    print(partPath)
+    print(destination)
 
     shutil.move(partPath, destination)
     webbrowser.open(r"C:\Users\zachw\Desktop\361 mvp\moved.txt")
