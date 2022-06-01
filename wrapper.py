@@ -128,9 +128,10 @@ def shipping():
 def findBox():
     root = r"C:\Users\zachw\Desktop\361Parts"
     partNum = partNumberBoxFindEntry.get()
+    partNumWithListed = partNum + ' LISTED'
 
     for dirpath, dirnames, filenames in os.walk(root):
-        if partNum in dirnames:
+        if partNum in dirnames or partNumWithListed in dirnames:
             partBoxPath = os.path.basename(dirpath)
             displayBoxNum(partBoxPath)
     return
@@ -165,10 +166,13 @@ def movePart():
     root = r"C:\Users\zachw\Desktop\361Parts"
     partNum = partNumberMoveEntry.get()
     boxNum = boxNumMoveEntry.get()
+    partNumWithListed = partNum + ' LISTED'
 
     for dirpath, dirnames, filenames in os.walk(root):
         if partNum in dirnames:
             partPath = dirpath + '\\' + partNum
+        elif partNumWithListed in dirnames:
+            partPath = dirpath + '\\' + partNumWithListed
 
     destination = root + '\\' + "box #%s" %(boxNum)
     print(partPath)
