@@ -5,11 +5,13 @@ import webbrowser
 import tkinter.messagebox
 import requests
 import json
+    
 
 HEIGHT = 500
 WIDTH = 800
 yvalue = .075
 xvalue = .17
+root = r"C:\Users\zachw\Desktop\361Parts"
 
 window = tk.Tk()
 
@@ -31,7 +33,6 @@ def soldClick():
         moveToSold()
 
 def moveToSold():
-    root = r"C:\Users\zachw\Desktop\361Parts"
     partNum = soldPartNumberEntry.get()
     soldPrice = soldPriceEntry.get()
     partNumListed = partNum + ' LISTED'
@@ -49,7 +50,6 @@ def moveToSold():
     return
 
 def makeDirectory(partNum, boxNum):
-    root = r"C:\Users\zachw\Desktop\361Parts"
     boxPath = root + r"\box #" + boxNum
 
     if(os.path.isdir(boxPath)):
@@ -67,11 +67,12 @@ def makeDirectory(partNum, boxNum):
         makeDirectory(partNum, boxNum)
 
 def makeFile(grpNum, partNum, name, env, weight, box, manufacturer, notes, numItems):
-    root = r"C:\Users\zachw\Desktop\361Parts"
     filePath = root + r"\box #" + box + "\\" + partNum + "\\description.txt"
 
-    text = "group Number: %s \nname: %s \nweight: %s \nenvelope size: %s \nmanufacturer: %s \nnumber of items: %s \nbox number: %s \nnotes: %s \n" %(grpNum, name, weight, env, manufacturer, numItems, box, notes)
+    textFrag1 = "group Number: %s \nname: %s \nweight: %s \nenvelope size: %s" %(grpNum, name, weight, env)
+    textFrag2 = "\nmanufacturer: %s \nnumber of items: %s \nbox number: %s \nnotes: %s \n" %(manufacturer, numItems, box, notes)
 
+    text = textFrag1 + textFrag2
     f = open(filePath, "w")
     f.truncate(0)
     f.seek(0)
@@ -79,8 +80,6 @@ def makeFile(grpNum, partNum, name, env, weight, box, manufacturer, notes, numIt
     f.close()
 
 def addPart():
-    root = r"C:\Users\zachw\Desktop\361Parts"
-
     grpNum = groupNumEntry.get()
     partNum = partNumEntry.get()
     boxNum = boxNumEntry.get()
@@ -126,7 +125,6 @@ def shipping():
     return
 
 def findBox():
-    root = r"C:\Users\zachw\Desktop\361Parts"
     partNum = partNumberBoxFindEntry.get()
     partNumWithListed = partNum + ' LISTED'
 
@@ -141,7 +139,6 @@ def displayBoxNum(partBoxPath):
     return
 
 def addListed():
-    root = r"C:\Users\zachw\Desktop\361Parts"
     partNum = partNumberAddListedEntry.get()
 
     alreadyTagged = root + '\\' + partNum + " LISTED"
@@ -163,7 +160,6 @@ def moveClick():
         movePart()
 
 def movePart():
-    root = r"C:\Users\zachw\Desktop\361Parts"
     partNum = partNumberMoveEntry.get()
     boxNum = boxNumMoveEntry.get()
     partNumWithListed = partNum + ' LISTED'
